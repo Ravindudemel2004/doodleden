@@ -68,9 +68,9 @@ class ProductDataLoader {
         
         switch(sortBy) {
             case 'price-low':
-                return sorted.sort((a, b) => parseFloat(a.Price || 0) - parseFloat(b.Price || 0));
+                return sorted.sort((a, b) => parseFloat(a['Price (LKR)'] || a.Price || 0) - parseFloat(b['Price (LKR)'] || b.Price || 0));
             case 'price-high':
-                return sorted.sort((a, b) => parseFloat(b.Price || 0) - parseFloat(a.Price || 0));
+                return sorted.sort((a, b) => parseFloat(b['Price (LKR)'] || b.Price || 0) - parseFloat(a['Price (LKR)'] || a.Price || 0));
             case 'name':
                 return sorted.sort((a, b) => (a.Name || '').localeCompare(b.Name || ''));
             default:
