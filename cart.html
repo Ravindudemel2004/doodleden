@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Doodleden</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>Doodle<span>den</span></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-icon active">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Shopping <span class="highlight">Cart</span></h1>
+            <p>Review your items and proceed to checkout</p>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-content">
+                <!-- Cart Items -->
+                <div class="cart-items-container">
+                    <div class="cart-header">
+                        <h2>Your Cart (<span id="cartItemCount">0</span> items)</h2>
+                        <button class="clear-cart" id="clearCart">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                    </div>
+
+                    <div class="cart-items" id="cartItems">
+                        <!-- Cart items will be dynamically loaded here -->
+                    </div>
+
+                    <div class="empty-cart" id="emptyCart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Looks like you haven't added any items to your cart yet.</p>
+                        <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <div class="summary-box">
+                        <h3>Order Summary</h3>
+                        
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="shipping">$0.00</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Tax (10%)</span>
+                            <span id="tax">$0.00</span>
+                        </div>
+                        
+                        <div class="summary-row discount" id="discountRow" style="display: none;">
+                            <span>Discount</span>
+                            <span id="discount">-$0.00</span>
+                        </div>
+                        
+                        <div class="summary-divider"></div>
+                        
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="total">$0.00</span>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="promo-code">
+                            <input type="text" id="promoInput" placeholder="Enter promo code">
+                            <button class="btn btn-outline" id="applyPromo">Apply</button>
+                        </div>
+                        <p class="promo-message" id="promoMessage"></p>
+
+                        <!-- Checkout Button -->
+                        <button class="btn btn-primary checkout-btn" id="checkoutBtn" disabled>
+                            <i class="fas fa-lock"></i> Proceed to Checkout
+                        </button>
+
+                        <!-- Continue Shopping -->
+                        <a href="products.html" class="continue-shopping">
+                            <i class="fas fa-arrow-left"></i> Continue Shopping
+                        </a>
+
+                        <!-- Trust Badges -->
+                        <div class="trust-badges">
+                            <div class="badge">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Secure Checkout</span>
+                            </div>
+                            <div class="badge">
+                                <i class="fas fa-undo"></i>
+                                <span>30-Day Returns</span>
+                            </div>
+                            <div class="badge">
+                                <i class="fas fa-truck"></i>
+                                <span>Fast Shipping</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <div class="container">
+            <div class="section-header">
+                <h2>You Might Also <span class="highlight">Like</span></h2>
+                <p>Complete your order with these popular items</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Premium Coloring Book</h3>
+                        <p class="product-category">Stationery</p>
+                        <div class="product-price">
+                            <span class="current-price">$12.99</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromCart('Premium Coloring Book', 12.99)">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Professional Pencil Set</h3>
+                        <p class="product-category">Stationery</p>
+                        <div class="product-price">
+                            <span class="current-price">$24.99</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromCart('Professional Pencil Set', 24.99)">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Procreate Brush Pack</h3>
+                        <p class="product-category">Digital Product</p>
+                        <div class="product-price">
+                            <span class="current-price">$29.99</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromCart('Procreate Brush Pack', 29.99)">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Resistor Kit 1/4W</h3>
+                        <p class="product-category">Electronics</p>
+                        <div class="product-price">
+                            <span class="current-price">$5.99</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCartFromCart('Resistor Kit 1/4W', 5.99)">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Doodle<span>den</span></h3>
+                    <p>Unleashing creativity one doodle at a time. Your trusted partner for all art and creative supplies.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Doodleden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Item Modal -->
+    <div class="modal" id="itemModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3>Update Item</h3>
+            <div class="modal-body">
+                <p id="modalItemName"></p>
+                <div class="quantity-control">
+                    <button class="qty-btn" id="decreaseQty"><i class="fas fa-minus"></i></button>
+                    <input type="number" id="modalQty" value="1" min="1">
+                    <button class="qty-btn" id="increaseQty"><i class="fas fa-plus"></i></button>
+                </div>
+                <p class="modal-price" id="modalPrice"></p>
+                <button class="btn btn-primary" id="updateQty">Update</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Cart Data
+        let cart = [];
+        let currentItemId = null;
+
+        // Load cart from localStorage
+        function loadCart() {
+            const savedCart = localStorage.getItem('doodledenCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            }
+            renderCart();
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('doodledenCart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        // Update cart count in navigation
+        function updateCartCount() {
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelectorAll('.cart-count').forEach(el => {
+                el.textContent = totalCount;
+            });
+            document.getElementById('cartItemCount').textContent = totalCount;
+        }
+
+        // Render cart items
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const emptyCart = document.getElementById('emptyCart');
+
+            if (cart.length === 0) {
+                cartItemsContainer.style.display = 'none';
+                emptyCart.style.display = 'block';
+                document.getElementById('checkoutBtn').disabled = true;
+            } else {
+                cartItemsContainer.style.display = 'block';
+                emptyCart.style.display = 'none';
+                document.getElementById('checkoutBtn').disabled = false;
+            }
+
+            cartItemsContainer.innerHTML = '';
+
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <div class="item-image">
+                        <i class="${getIconForCategory(item.category)}"></i>
+                    </div>
+                    <div class="item-details">
+                        <h4>${item.name}</h4>
+                        <p class="item-category">${item.category}</p>
+                        <p class="item-price">$${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="item-quantity">
+                        <button class="qty-btn" onclick="updateQuantity(${index}, -1)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" value="${item.quantity}" min="1" onchange="updateQuantityDirect(${index}, this.value)">
+                        <button class="qty-btn" onclick="updateQuantity(${index}, 1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="item-total">
+                        <p>$${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                    <button class="remove-item" onclick="removeItem(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                cartItemsContainer.appendChild(itemElement);
+            });
+
+            updateSummary();
+        }
+
+        // Get icon based on category
+        function getIconForCategory(category) {
+            const icons = {
+                'Stationery': 'fas fa-pencil-alt',
+                'Digital Product': 'fas fa-download',
+                'Electronics': 'fas fa-microchip'
+            };
+            return icons[category] || 'fas fa-box';
+        }
+
+        // Update quantity
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            
+            if (cart[index].quantity <= 0) {
+                removeItem(index);
+                return;
+            }
+            
+            saveCart();
+            renderCart();
+        }
+
+        // Update quantity directly from input
+        function updateQuantityDirect(index, value) {
+            const qty = parseInt(value);
+            if (qty > 0) {
+                cart[index].quantity = qty;
+                saveCart();
+                renderCart();
+            }
+        }
+
+        // Remove item
+        function removeItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+            showNotification('Item removed from cart');
+        }
+
+        // Clear cart
+        document.getElementById('clearCart').addEventListener('click', () => {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                cart = [];
+                saveCart();
+                renderCart();
+                showNotification('Cart cleared');
+            }
+        });
+
+        // Update summary
+        function updateSummary() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 50 ? 0 : 5.99;
+            const tax = subtotal * 0.10;
+            const discount = document.getElementById('discountRow').style.display === 'block' ? 
+                parseFloat(document.getElementById('discount').textContent.replace('$', '')) : 0;
+            const total = subtotal + shipping + tax - discount;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('shipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+
+            // Free shipping message
+            const shippingEl = document.getElementById('shipping');
+            if (subtotal < 50 && cart.length > 0) {
+                shippingEl.innerHTML = `$${shipping.toFixed(2)} <small>(Add $${(50 - subtotal).toFixed(2)} more for free shipping)</small>`;
+            }
+        }
+
+        // Promo code functionality
+        const promoCodes = {
+            'WELCOME10': 0.10,
+            'SAVE20': 0.20,
+            'FREESHIP': 0.05
+        };
+
+        document.getElementById('applyPromo').addEventListener('click', () => {
+            const code = document.getElementById('promoInput').value.toUpperCase().trim();
+            const messageEl = document.getElementById('promoMessage');
+
+            if (promoCodes[code]) {
+                const discount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) * promoCodes[code];
+                document.getElementById('discount').textContent = `-$${discount.toFixed(2)}`;
+                document.getElementById('discountRow').style.display = 'flex';
+                messageEl.textContent = `Promo code applied! You saved $${discount.toFixed(2)}`;
+                messageEl.className = 'promo-message success';
+                updateSummary();
+            } else {
+                messageEl.textContent = 'Invalid promo code';
+                messageEl.className = 'promo-message error';
+            }
+        });
+
+        // Checkout button
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+            
+            // In a real application, this would redirect to checkout page
+            showNotification('Redirecting to checkout...');
+            setTimeout(() => {
+                alert('Checkout functionality would be implemented here. Total: ' + document.getElementById('total').textContent);
+            }, 1000);
+        });
+
+        // Add to cart from related products
+        function addToCartFromCart(name, price) {
+            const category = name.includes('Brush') || name.includes('Template') || name.includes('Planner') ? 
+                'Digital Product' : (name.includes('Resistor') || name.includes('Kit') ? 'Electronics' : 'Stationery');
+            
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: Date.now(),
+                    name: name,
+                    price: price,
+                    category: category,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            renderCart();
+            showNotification(`${name} added to cart!`);
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('itemModal');
+        const closeModal = document.getElementById('closeModal');
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Initialize cart on page load
+        window.addEventListener('load', () => {
+            loadCart();
+        });
+    </script>
+</body>
+</html>

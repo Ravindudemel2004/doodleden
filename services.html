@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Doodleden</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="services.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>Doodle<span>den</span></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+                <li><a href="index.html#contact">Contact Us</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our <span class="highlight">Services</span></h1>
+            <p>Professional creative services to bring your vision to life</p>
+        </div>
+    </section>
+
+    <!-- Services Filter -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All Services</button>
+                <button class="filter-btn" data-filter="classes">Art Classes</button>
+                <button class="filter-btn" data-filter="corporate">Corporate</button>
+                <button class="filter-btn" data-filter="custom">Custom Orders</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="services-grid" id="servicesGrid">
+                
+                <!-- Art Classes -->
+                <div class="service-card" data-category="classes" data-price="49.99" data-name="Beginner Drawing Class">
+                    <div class="service-badge">Popular</div>
+                    <div class="service-image">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Beginner Drawing Class</h3>
+                        <p class="service-category">Art Classes</p>
+                        <p class="service-description">Learn fundamental drawing techniques with professional instructors. Perfect for beginners.</p>
+                        <div class="service-details">
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>2 Hours</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-users"></i>
+                                <span>Max 15 Students</span>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="current-price">$49.99</span>
+                            <span class="original-price">$69.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('Beginner Drawing Class', 49.99, 'Service')">
+                            <i class="fas fa-shopping-cart"></i> Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-category="classes" data-price="79.99" data-name="Watercolor Workshop">
+                    <div class="service-image">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Watercolor Workshop</h3>
+                        <p class="service-category">Art Classes</p>
+                        <p class="service-description">Master the art of watercolor painting with hands-on guidance and premium materials included.</p>
+                        <div class="service-details">
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>4 Hours</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-users"></i>
+                                <span>Max 10 Students</span>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="current-price">$79.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('Watercolor Workshop', 79.99, 'Service')">
+                            <i class="fas fa-shopping-cart"></i> Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-category="classes" data-price="99.99" data-name="Digital Art Masterclass">
+                    <div class="service-badge">New</div>
+                    <div class="service-image">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Digital Art Masterclass</h3>
+                        <p class="service-category">Art Classes</p>
+                        <p class="service-description">Learn digital illustration using Procreate and Photoshop. Bring your own tablet.</p>
+                        <div class="service-details">
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>6 Hours</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-users"></i>
+                                <span>Max 8 Students</span>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="current-price">$99.99</span>
+                            <span class="original-price">$129.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('Digital Art Masterclass', 99.99, 'Service')">
+                            <i class="fas fa-shopping-cart"></i> Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Corporate Services -->
+                <div class="service-card" data-category="corporate" data-price="299.99" data-name="Team Building Art Session">
+                    <div class="service-image">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Team Building Art Session</h3>
+                        <p class="service-category">Corporate</p>
+                        <p class="service-description">Engage your team with creative activities. Perfect for corporate events and team bonding.</p>
+                        <div class="service-details">
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>3 Hours</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-users"></i>
+                                <span>Up to 30 People</span>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="current-price">$299.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('Team Building Art Session', 299.99, 'Service')">
+                            <i class="fas fa-shopping-cart"></i> Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-category="corporate" data-price="499.99" data-name="Corporate Art Workshop">
+                    <div class="service-badge">Premium</div>
+                    <div class="service-image">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Corporate Art Workshop</h3>
+                        <p class="service-category">Corporate</p>
+                        <p class="service-description">Full-day creative workshop for your company. Includes all materials and refreshments.</p>
+                        <div class="service-details">
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>8 Hours</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-users"></i>
+                                <span>Up to 50 People</span>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="current-price">$499.99</span>
+                            <span class="original-price">$599.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('Corporate Art Workshop', 499.99, 'Service')">
+                            <i class="fas fa-shopping-cart"></i> Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-category="corporate" data-price="199.99" data-name="Virtual Art Class">
+                    <div class="service-image">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Virtual Art Class</h3>
+                        <p class="service-category">Corporate</p>
+                        <p class="service-description">Online art session for remote teams. Materials kit shipped to participants beforehand.</p>
+                        <div class="service-details">
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>2 Hours</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-users"></i>
+                                <span>Unlimited</span>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="current-price">$199.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('Virtual Art Class', 199.99, 'Service')">
+                            <i class="fas fa-shopping-cart"></i> Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Custom Orders -->
+                <div class="service-card" data-category="custom" data-price="149.99" data-name="Custom Coloring Book">
+                    <div class="service-image">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Custom Coloring Book</h3>
+                        <p class="service-category">Custom Orders</p>
+                        <p class="service-description">Personalized coloring book with your photos, logos, or custom designs. 20 pages.</p>
+                        <div class="service-details">
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>5-7 Days</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-copy"></i>
+                                <span>20 Pages</span>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="current-price">$149.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('Custom Coloring Book', 149.99, 'Service')">
+                            <i class="fas fa-shopping-cart"></i> Order Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-category="custom" data-price="249.99" data-name="Custom Art Supplies Kit">
+                    <div class="service-badge">Bestseller</div>
+                    <div class="service-image">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Custom Art Supplies Kit</h3>
+                        <p class="service-category">Custom Orders</p>
+                        <p class="service-description">Personalized art supply kit with custom branding. Perfect for gifts or corporate events.</p>
+                        <div class="service-details">
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>7-10 Days</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-box"></i>
+                                <span>Customizable</span>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="current-price">$249.99</span>
+                            <span class="original-price">$299.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('Custom Art Supplies Kit', 249.99, 'Service')">
+                            <i class="fas fa-shopping-cart"></i> Order Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-category="custom" data-price="399.99" data-name="Portrait Commission">
+                    <div class="service-image">
+                        <i class="fas fa-portrait"></i>
+                    </div>
+                    <div class="service-info">
+                        <h3>Portrait Commission</h3>
+                        <p class="service-category">Custom Orders</p>
+                        <p class="service-description">Custom hand-drawn portrait from your photo. Available in various styles and sizes.</p>
+                        <div class="service-details">
+                            <div class="detail">
+                                <i class="fas fa-clock"></i>
+                                <span>10-14 Days</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>Multiple Sizes</span>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="current-price">$399.99</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('Portrait Commission', 399.99, 'Service')">
+                            <i class="fas fa-shopping-cart"></i> Order Now
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose <span class="highlight">Our Services</span></h2>
+                <p>We deliver excellence in every creative endeavor</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Certified Instructors</h3>
+                    <p>Learn from professional artists with years of teaching experience</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>Premium Materials</h3>
+                    <p>High-quality art supplies provided for all workshops and classes</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Flexible Scheduling</h3>
+                    <p>Book sessions at your convenience with our flexible scheduling</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-award"></i>
+                    <h3>Satisfaction Guaranteed</h3>
+                    <p>100% satisfaction guarantee or your money back</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our <span class="highlight">Clients Say</span></h2>
+                <p>Real feedback from satisfied customers</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The watercolor workshop was amazing! The instructor was patient and knowledgeable. I learned so much in just one session."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Art Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"We booked the team building session for our company and it was a huge success! Everyone had a great time and we created beautiful artwork together."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>HR Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Ordered a custom coloring book with family photos for my mom's birthday. She absolutely loved it! The quality was exceptional."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Emily Rodriguez</h4>
+                            <p>Happy Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Doodle<span>den</span></h3>
+                    <p>Unleashing creativity one doodle at a time. Your trusted partner for all art and creative supplies.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Doodleden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Filter Functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                serviceCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // ===== SHARED CART FUNCTIONALITY =====
+        function getCart() {
+            const savedCart = localStorage.getItem('doodledenCart');
+            return savedCart ? JSON.parse(savedCart) : [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('doodledenCart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelectorAll('.cart-count').forEach(el => {
+                el.textContent = totalCount;
+            });
+        }
+
+        function addToCart(name, price, category) {
+            let cart = getCart();
+            
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: Date.now(),
+                    name: name,
+                    price: price,
+                    category: category,
+                    quantity: 1
+                });
+            }
+            
+            saveCart(cart);
+            showNotification(`${name} added to cart!`);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Load cart count on page load
+        window.addEventListener('load', () => {
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
