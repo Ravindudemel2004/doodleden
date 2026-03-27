@@ -1,12 +1,47 @@
 // data-loader.js
 class ProductDataLoader {
     constructor() {
-        // REPLACE WITH YOUR GOOGLE SHEET CSV LINK
         this.sheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRfHsJsbleHh9MLcH6P4-N73phXnYpwFlj2nnWyVGadOrgmFFpMxVZDJHIRgKvVmCr9MvRjLWaIukyJ/pub?output=csv';
         this.products = [];
     }
 
-    // Convert CSV to JSON
+    // Convert Google Drive share link to direct image link
+    convertGoogleDriveUrl(url) {
+        if (!url || url.trim() === '') return '';
+        
+        // If already a direct link, return as is
+        if (url.includes('googleapis.com') || url.includes('uc?export=view')) {
+            return url;
+        }
+        
+        // Extract file ID from various Google Drive URL formats
+        let fileId = '';
+        
+        // Format 1: https://drive.google.com/file/d/FILE_ID/view
+        const match1 = url.match(/\/file\/d\/([^/]+)/);
+        if (match1 && match1[1]) {
+            fileId = match1[1];
+        }
+        
+        // Format 2: https://drive.google.com/open?id=FILE_ID
+        const match2 = url.match(/[?&]id=([^&]+)/);
+        if (match2 && match2[1]) {
+            fileId = match2[1];
+        }
+        
+        // Format 3: Just the file ID
+        if (!fileId && url.length > 20) {
+            fileId = url;
+        }
+        
+        // Convert to direct link
+        if (fileId) {
+            return `https://drive.google.com/uc?export=view&id=${fileId}`;
+        }
+        
+        return url;
+    }
+
     csvToJson(csv) {
         const lines = csv.split('\n');
         const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
@@ -23,6 +58,10 @@ class ProductDataLoader {
             });
             
             if (obj.ID) {
+                // Convert Google Drive URL if present
+                if (obj['Image URL']) {
+                    obj['Image URL'] = this.convertGoogleDriveUrl(obj['Image URL']);
+                }
                 result.push(obj);
             }
         }
@@ -30,7 +69,6 @@ class ProductDataLoader {
         return result;
     }
 
-    // Fetch data from Google Sheets
     async fetchProducts() {
         try {
             const response = await fetch(this.sheetURL);
@@ -44,7 +82,6 @@ class ProductDataLoader {
         }
     }
 
-    // Get products by category
     getProductsByCategory(category) {
         if (category === 'all') return this.products;
         return this.products.filter(p => 
@@ -52,7 +89,6 @@ class ProductDataLoader {
         );
     }
 
-    // Search products
     searchProducts(query) {
         const lowerQuery = query.toLowerCase();
         return this.products.filter(p => 
@@ -62,7 +98,6 @@ class ProductDataLoader {
         );
     }
 
-    // Sort products
     sortProducts(products, sortBy) {
         const sorted = [...products];
         
@@ -79,5 +114,4 @@ class ProductDataLoader {
     }
 }
 
-// Create global instance
 const dataLoader = new ProductDataLoader();
