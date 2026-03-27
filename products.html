@@ -146,68 +146,80 @@
         });
 
         function renderProducts(products) {
-            const grid = document.getElementById('productsGrid');
-            
-            if (!products || products.length === 0) {
-                grid.innerHTML = '<div class="no-products" style="text-align: center; padding: 40px; grid-column: 1/-1;">No products found</div>';
-                return;
-            }
+    const grid = document.getElementById('productsGrid');
+    
+    if (!products || products.length === 0) {
+        grid.innerHTML = '<div class="no-products" style="text-align: center; padding: 40px; grid-column: 1/-1;">No products found</div>';
+        return;
+    }
 
-            grid.innerHTML = products.map(product => {
-                const id = product.ID || '';
-                const name = product.Name || 'Unnamed Product';
-                const category = product.Category || 'General';
-                const price = product['Price (LKR)'] || product.Price || '0';
-                const discountPrice = product['Discount Price (LKR)'] || product['Discount Price'] || '';
-                const description = product.Description || '';
-                const badge = product.Badge || '';
-                const rating = product.Rating || '';
-                const imageUrl = product['Image URL'] || product.ImageURL || product.Image || '';
+    grid.innerHTML = products.map(product => {
+        const id = product.ID || '';
+        const name = product.Name || 'Unnamed Product';
+        const category = product.Category || 'General';
+        const price = product['Price (LKR)'] || product.Price || '0';
+        const discountPrice = product['Discount Price (LKR)'] || product['Discount Price'] || '';
+        const description = product.Description || '';
+        const badge = product.Badge || '';
+        const rating = product.Rating || '';
+        const imageUrl = product['Image URL'] || '';
+        
+        const hasDiscount = discountPrice && parseFloat(discountPrice) > 0 && parseFloat(discountPrice) < parseFloat(price);
+        const displayPrice = hasDiscount ? discountPrice : price;
+        
+        return `
+            <div class="product-card" 
+                 data-category="${category}" 
+                 data-price="${price}" 
+                 data-name="${name}">
                 
-                const hasDiscount = discountPrice && parseFloat(discountPrice) > 0 && parseFloat(discountPrice) < parseFloat(price);
-                const displayPrice = hasDiscount ? discountPrice : price;
+                ${badge ? `<div class="product-badge ${badge === 'Digital' ? 'digital' : ''}">${badge}</div>` : ''}
                 
-                return `
-                    <div class="product-card" 
-                         data-category="${category}" 
-                         data-price="${price}" 
-                         data-name="${name}">
-                        
-                        ${badge ? `<div class="product-badge ${badge === 'Digital' ? 'digital' : ''}">${badge}</div>` : ''}
-                        
-                        <div class="product-image">
-                            ${imageUrl ? `
-                                <img src="${imageUrl}" alt="${name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <i class="fas fa-${getIconForCategory(category)}" style="display: none;"></i>
-                            ` : `
-                                <i class="fas fa-${getIconForCategory(category)}"></i>
-                            `}
-                        </div>
-                        
-                        <div class="product-info">
-                            <h3>${name}</h3>
-                            <p class="product-category">${category}</p>
-                            
-                            ${rating ? `
-                            <div class="product-rating">
-                                ${renderStars(rating)}
-                                <span>(${rating})</span>
-                            </div>
-                            ` : ''}
-                            
-                            <div class="product-price">
-                                <span class="current-price">Rs. ${formatPrice(displayPrice)}</span>
-                                ${hasDiscount ? `<span class="original-price">Rs. ${formatPrice(price)}</span>` : ''}
-                            </div>
-                            
-                            <button class="add-to-cart" onclick="addToCart('${name}', ${displayPrice}, '${category}')">
-                                <i class="fas fa-shopping-cart"></i> Add to Cart
-                            </button>
-                        </div>
+                <div class="product-image">
+                    ${imageUrl ? `
+                        <img src="${imageUrl}" 
+                             alt="${name}" 
+                             loading="lazy"
+                             onerror="handleImageError(this)">
+                        <i class="fas fa-${getIconForCategory(category)}" style="display: none;" class="fallback-icon"></i>
+                    ` : `
+                        <i class="fas fa-${getIconForCategory(category)}"></i>
+                    `}
+                </div>
+                
+                <div class="product-info">
+                    <h3>${name}</h3>
+                    <p class="product-category">${category}</p>
+                    
+                    ${rating ? `
+                    <div class="product-rating">
+                        ${renderStars(rating)}
+                        <span>(${rating})</span>
                     </div>
-                `;
-            }).join('');
-        }
+                    ` : ''}
+                    
+                    <div class="product-price">
+                        <span class="current-price">Rs. ${formatPrice(displayPrice)}</span>
+                        ${hasDiscount ? `<span class="original-price">Rs. ${formatPrice(price)}</span>` : ''}
+                    </div>
+                    
+                    <button class="add-to-cart" onclick="addToCart('${name}', ${displayPrice}, '${category}')">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Handle image load error - show icon instead
+function handleImageError(imgElement) {
+    imgElement.style.display = 'none';
+    const icon = imgElement.nextElementSibling;
+    if (icon && icon.classList.contains('fallback-icon')) {
+        icon.style.display = 'flex';
+    }
+}
 
         function formatPrice(price) {
             return parseFloat(price).toLocaleString('en-LK');
