@@ -130,26 +130,21 @@
         </div>
     </footer>
 
-    <!-- Include Data Loader -->
     <script src="data-loader.js"></script>
     
-    <!-- Product Page Script -->
     <script>
-        // Mobile Navigation
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
 
-        // Load products on page load
         window.addEventListener('load', async () => {
             await dataLoader.fetchProducts();
             renderProducts(dataLoader.products);
             updateCartCount();
         });
 
-        // Render products from Google Sheet
         function renderProducts(products) {
             const grid = document.getElementById('productsGrid');
             
@@ -159,17 +154,16 @@
             }
 
             grid.innerHTML = products.map(product => {
-                // Get the correct column names from your sheet
                 const id = product.ID || '';
                 const name = product.Name || 'Unnamed Product';
                 const category = product.Category || 'General';
-                const price = product.Price || '0';
-                const discountPrice = product['Discount Price'] || '';
+                const price = product['Price (LKR)'] || product.Price || '0';
+                const discountPrice = product['Discount Price (LKR)'] || product['Discount Price'] || '';
                 const description = product.Description || '';
                 const badge = product.Badge || '';
                 const rating = product.Rating || '';
+                const imageUrl = product['Image URL'] || product.ImageURL || product.Image || '';
                 
-                // Determine display price
                 const hasDiscount = discountPrice && parseFloat(discountPrice) > 0 && parseFloat(discountPrice) < parseFloat(price);
                 const displayPrice = hasDiscount ? discountPrice : price;
                 
@@ -182,7 +176,12 @@
                         ${badge ? `<div class="product-badge ${badge === 'Digital' ? 'digital' : ''}">${badge}</div>` : ''}
                         
                         <div class="product-image">
-                            <i class="fas fa-${getIconForCategory(category)}"></i>
+                            ${imageUrl ? `
+                                <img src="${imageUrl}" alt="${name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <i class="fas fa-${getIconForCategory(category)}" style="display: none;"></i>
+                            ` : `
+                                <i class="fas fa-${getIconForCategory(category)}"></i>
+                            `}
                         </div>
                         
                         <div class="product-info">
@@ -197,8 +196,8 @@
                             ` : ''}
                             
                             <div class="product-price">
-                                <span class="current-price">$${displayPrice}</span>
-                                ${hasDiscount ? `<span class="original-price">$${price}</span>` : ''}
+                                <span class="current-price">Rs. ${formatPrice(displayPrice)}</span>
+                                ${hasDiscount ? `<span class="original-price">Rs. ${formatPrice(price)}</span>` : ''}
                             </div>
                             
                             <button class="add-to-cart" onclick="addToCart('${name}', ${displayPrice}, '${category}')">
@@ -210,7 +209,10 @@
             }).join('');
         }
 
-        // Get icon based on category
+        function formatPrice(price) {
+            return parseFloat(price).toLocaleString('en-LK');
+        }
+
         function getIconForCategory(category) {
             const icons = {
                 'stationery': 'pencil-alt',
@@ -222,7 +224,6 @@
             return icons[category.toLowerCase()] || 'box';
         }
 
-        // Render star ratings
         function renderStars(rating) {
             const numRating = parseFloat(rating);
             if (isNaN(numRating)) return '';
@@ -245,7 +246,6 @@
             return stars;
         }
 
-        // Filter functionality
         const filterBtns = document.querySelectorAll('.filter-btn');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -258,7 +258,6 @@
             });
         });
 
-        // Search functionality
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value;
@@ -266,7 +265,6 @@
             renderProducts(results);
         });
 
-        // Sort functionality
         const sortDropdown = document.getElementById('sortDropdown');
         sortDropdown.addEventListener('change', (e) => {
             const sortBy = e.target.value;
@@ -279,7 +277,6 @@
             renderProducts(sorted);
         });
 
-        // Cart functionality
         function getCart() {
             return JSON.parse(localStorage.getItem('doodledenCart')) || [];
         }
